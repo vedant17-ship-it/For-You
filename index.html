@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Akshara ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-pink: #ff758c;
+            --deep-rose: #ff4b2b;
+            --bg-gradient: linear-gradient(135deg, #fceabb 0%, #fecaba 45%, #f68084 100%);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: var(--bg-gradient);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            touch-action: manipulation; /* Optimizes for mobile tapping */
+        }
+
+        #container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 10;
+            width: 80%;
+            max-width: 350px;
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #d63384;
+            font-size: 2.8rem;
+            margin: 0 0 15px 0;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+            align-items: center;
+        }
+
+        button {
+            padding: 15px 30px;
+            width: 100%;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #yes-btn {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 75, 43, 0.4);
+        }
+
+        #no-btn {
+            background-color: #fff;
+            color: #888;
+            border: 1px solid #eee;
+        }
+
+        /* Heart Animation */
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            user-select: none;
+            pointer-events: none;
+            animation: move linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes move {
+            0% { transform: translateY(110vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .success-content {
+            display: none;
+        }
+
+        .success-content h1 {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div id="main-content">
+            <h1>Hi Akshara! ❤️</h1>
+            <p> From years I have been waiting to ask you this...</p>
+            <p><strong>Hey will you be my Valentine?
+</strong></p> Please don't click on No... 🥺
+            
+            <div class="buttons">
+                <button id="yes-btn" onclick="celebrate()">Yes, I will!</button>
+                <button id="no-btn">No</button>
+            </div>
+        </div>
+
+        <div id="success-content" class="success-content">
+            <h1>Yess!!!! ❤️</h1>
+            <p>I knew you'd say yes, My 5'0 💝</p>
+            <p style="font-size: 0.9rem;">(Even if I didn't give you much choice... 😉😗)</p>
+            <div style="font-size: 3rem; margin-top: 15px;">🌹💖🥰</div>
+        </div>
+    </div>
+
+    <script>
+        // Background Heart Generator
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 400);
+
+        // Mobile-Friendly "No" Button Escape Logic
+        const noBtn = document.getElementById('no-btn');
+        
+        const moveButton = (e) => {
+            e.preventDefault(); // Critical for mobile
+            const maxX = window.innerWidth - noBtn.offsetWidth - 30;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 30;
+            
+            const x = Math.max(10, Math.floor(Math.random() * maxX));
+            const y = Math.max(10, Math.floor(Math.random() * maxY));
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+            noBtn.style.width = '120px'; // Prevent resizing
+        };
+
+        noBtn.addEventListener('touchstart', moveButton);
+        noBtn.addEventListener('mouseover', moveButton);
+
+        // Success Transition
+        function celebrate() {
+            document.getElementById('main-content').style.display = 'none';
+            const success = document.getElementById('success-content');
+            success.style.display = 'block';
+            
+            // Explosion of hearts
+            for(let i=0; i<60; i++) {
+                setTimeout(createHeart, i * 40);
+            }
+        }
+    </script>
+</body>
+</html>
